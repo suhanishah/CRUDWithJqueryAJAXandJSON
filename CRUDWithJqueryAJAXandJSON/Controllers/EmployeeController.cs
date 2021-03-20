@@ -1,15 +1,12 @@
 ﻿using CRUDWithJqueryAJAXandJSON.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CRUDWithJqueryAJAXandJSON.Controllers
 {
     public class EmployeeController : Controller
     {
-       EmployeeDBContext db = new EmployeeDBContext();
+        EmployeeDBContext db = new EmployeeDBContext();
 
         public ActionResult Index()
         {
@@ -51,7 +48,7 @@ namespace CRUDWithJqueryAJAXandJSON.Controllers
             db.Employees.Remove(employee);
             db.SaveChanges();
 
-            return Json(employee , JsonRequestBehavior.AllowGet);
+            return Json(employee, JsonRequestBehavior.AllowGet);
         }
     }
 }
