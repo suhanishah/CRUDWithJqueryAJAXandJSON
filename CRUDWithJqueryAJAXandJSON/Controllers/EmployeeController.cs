@@ -19,6 +19,7 @@ namespace CRUDWithJqueryAJAXandJSON.Controllers
             return Json(employees, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult Add(Employee employee)
         {
             db.Employees.Add(employee);
@@ -34,6 +35,7 @@ namespace CRUDWithJqueryAJAXandJSON.Controllers
             return Json(employee, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult Update(Employee employee)
         {
             var employeeInDb = db.Employees.Where(x => x.EmployeeId == employee.EmployeeId).SingleOrDefault();
@@ -48,6 +50,7 @@ namespace CRUDWithJqueryAJAXandJSON.Controllers
             return Json(employee, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult Delete(int id)
         {
             var employee = db.Employees.Where(x => x.EmployeeId == id).SingleOrDefault();

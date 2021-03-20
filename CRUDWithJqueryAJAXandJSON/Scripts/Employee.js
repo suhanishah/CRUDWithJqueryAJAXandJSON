@@ -19,7 +19,7 @@ function loadData()
                 html += '<td>' + item.State + '</td>';
                 html += '<td>' + item.Country + '</td>';
                 html += '<td>' + '<a href="#" onclick="return GetById(' + item.EmployeeId + ')">Edit</a> ' +
-                    '| <a href="#" onclick="Delele(' + item.EmployeeId + ')">Delete</a></td>';  
+                    '| <a href="#" onclick="Delete(' + item.EmployeeId + ')">Delete</a></td>';  
                 html += '</tr>'; 
             });
             $('.tbody').html(html);
@@ -158,7 +158,24 @@ function Update()
         error: function (errorMessage) {
             alert(errorMessage.responseText);
         }
-
     });
     return false;
+}
+
+function Delete(employeeId) {
+
+    alert("Are you sure you want to delete this Employee?");
+    $.ajax({
+        url: "/Employee/Delete/" + employeeId,
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function () {
+            loadData();
+            alert("Employee Deleted");
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
 }
