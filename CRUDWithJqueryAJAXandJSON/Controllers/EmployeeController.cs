@@ -9,14 +9,14 @@ namespace CRUDWithJqueryAJAXandJSON.Controllers
 {
     public class EmployeeController : Controller
     {
-        public EmployeeDBContext db;
+       EmployeeDBContext db = new EmployeeDBContext();
 
-        public EmployeeController(EmployeeDBContext empDb)
+        public ActionResult Index()
         {
-            empDb = db;
+            return View();
         }
-        // GET: Employee
-        public JsonResult Index()
+
+        public JsonResult EmployeeList()
         {
             var employees = db.Employees.ToList();
             return Json(employees, JsonRequestBehavior.AllowGet);

@@ -1,0 +1,31 @@
+﻿@model CRUDWithJqueryAJAXandJSON.Models.Employee
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<br/>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employeeModal" onclick="clearTextBox();">Add New Employee</button>
+
+<h2>All Employees</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Age</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+
+    </tbody>
+</table>
+
+
+<script src="~/Scripts/jquery-1.9.1.js"></script>  
+<script src="~/Scripts/bootstrap.js"></script>  
+<link href="~/Content/bootstrap.css" rel="stylesheet" />  
+<script src="~/Scripts/employee.js"></script>  
