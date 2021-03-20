@@ -12,7 +12,7 @@ function loadData()
         success: function (result) {
             var html = '';
             $.each(result, function (key, item) {
-                html += '<tr>'
+                html += '<tr>';
                 html += '<td>' + item.EmployeeId + '</td>';
                 html += '<td>' + item.Name + '</td>';
                 html += '<td>' + item.Age + '</td>';
@@ -29,7 +29,10 @@ function loadData()
 
 function Add()
 {
-    debugger
+    var validation = validate();
+    if (validation === false) {
+        return false;
+    }  
     var empObj =
         {
             EmployeeID: $('#EmployeeID').val(),
@@ -53,4 +56,41 @@ function Add()
             alert(errormessage.responseText);
         }  
     });
+}
+
+function validate()
+{
+    var isValid = true;
+    if ($('#Name').val().trim() === "")
+    {
+        $('#Name').css('border-color', 'red');
+        isValid = false;
+    }
+    else {
+        $('#Name').css('border-color', 'lightgrey');
+    }
+    if ($('#Age').val().trim() === "") {
+        $('#Age').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#Age').css('border-color', 'lightgrey');
+    }
+    if ($('#State').val().trim() === "") {
+        $('#State').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#State').css('border-color', 'lightgrey');
+    }
+
+    if ($('#Country').val().trim() === "") {
+        $('#Country').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#Country').css('border-color', 'lightgrey');
+    }
+
+    return isValid;
 }
