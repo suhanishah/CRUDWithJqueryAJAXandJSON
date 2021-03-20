@@ -52,8 +52,9 @@ function Add()
         dataType: "json",
         success: function (result)
         {
+            $("#employeeModal").modal('hide');
             loadData();
-            $('#employeeModal').modal('hide');
+
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -102,7 +103,6 @@ function validate()
 
 function GetById(employeeId)
 {
-    debugger
     $.ajax({
         url: "/Employee/GetById/" + employeeId,
         //data: employeeId,
@@ -111,7 +111,7 @@ function GetById(employeeId)
         dataType: "json",
         success: function (data)
         {
-            $('#EmployeeID').val(data.EmployeeID);  
+            $('#EmployeeID').val(data.EmployeeId);  
             $("#Name").val(data.Name);
             $('#Age').val(data.Age);
             $('#State').val(data.State);
@@ -124,6 +124,41 @@ function GetById(employeeId)
          error: function (errormessage) {
             alert(errormessage.responseText);
         }
+    });
+    return false;
+}
+
+function Update()
+{
+    var validation = validate();
+    if (validation === false) {
+        return false;
+    }
+   
+    var empObj =
+        {
+            EmployeeID: $('#EmployeeID').val(),
+            Name: $('#Name').val(),
+            Age: $('#Age').val(),
+            State: $('#State').val(),
+            Country: $('#Country').val()
+        };
+
+    $.ajax({
+        url: "/Employee/Update",
+        data: JSON.stringify(empObj),
+        type: "Post",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function ()
+        {
+            $("#employeeModal").modal('hide');
+            loadData();
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+
     });
     return false;
 }
