@@ -24,6 +24,13 @@ namespace CRUDWithJqueryAJAXandJSON.Controllers
             db.Employees.Add(employee);
             db.SaveChanges();
 
+            return Json(JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetById(int id)
+        {
+            var employee = db.Employees.Where(x => x.EmployeeId == id).SingleOrDefault();
+
             return Json(employee, JsonRequestBehavior.AllowGet);
         }
 

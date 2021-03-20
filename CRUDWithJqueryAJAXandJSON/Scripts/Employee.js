@@ -18,6 +18,9 @@ function loadData()
                 html += '<td>' + item.Age + '</td>';
                 html += '<td>' + item.State + '</td>';
                 html += '<td>' + item.Country + '</td>';
+                html += '<td>' + '<a href="#" onclick="return GetById(' + item.EmployeeId + ')">Edit</a> ' +
+                    '| <a href="#" onclick="Delele(' + item.EmployeeId + ')">Delete</a></td>';  
+                html += '</tr>'; 
             });
             $('.tbody').html(html);
         },
@@ -58,6 +61,8 @@ function Add()
     });
 }
 
+
+
 function validate()
 {
     var isValid = true;
@@ -93,4 +98,32 @@ function validate()
     }
 
     return isValid;
+}
+
+function GetById(employeeId)
+{
+    debugger
+    $.ajax({
+        url: "/Employee/GetById/" + employeeId,
+        //data: employeeId,
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data)
+        {
+            $('#EmployeeID').val(data.EmployeeID);  
+            $("#Name").val(data.Name);
+            $('#Age').val(data.Age);
+            $('#State').val(data.State);
+            $('#Country').val(data.Country);
+
+            $("#employeeModal").modal('show');
+            $('#btnUpdate').show();
+            $('#btnAdd').hide();  
+        },
+         error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+    return false;
 }
